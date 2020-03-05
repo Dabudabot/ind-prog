@@ -7,3 +7,36 @@
 [submodule "students/farukh"]
 	path = students/farukh
 	url = https://github.com/Fyaushev/ind-prog
+[submodule "students/ygazizov"]
+	path = students/ygazizov
+	url = https://gitlab.com/imcubstudy/mipt/dati/IndProg/1_task.git
+[submodule "students/dgushchin"]
+	path = students/dgushchin
+	url = https://github.com/DMCKG1999/A-Industrial-Programming
+[submodule "students/fmikoian"]
+	path = students/fmikoian
+	url = https://github.com/Phikimon/ind_progr_class
+[submodule "students/itaraymovich"]
+	path = students/itaraymovich
+	url = https://github.com/trmigor/Industrial_programming
+[submodule "students/juzyanov"]
+	path = students/juzyanov
+	url = https://github.com/bigtelescope/Acronis-Tasks
+[submodule "students/mkulbitski"]
+	path = students/mkulbitski
+	url = https://github.com/kulbitsky99/industrial_programming_acronis_2020
+[submodule "students/vpukhov"]
+	path = students/vpukhov
+	url = https://github.com/pooh64/dati_indpr
+[submodule "students/yprokhorskoy"]
+	path = students/yprokhorskoy
+	url = https://github.com/yaropro14/AcronisTask
+[submodule "students/graisikh"]
+	path = students/graisikh
+	url = https://github.com/EgoRga717/ind_prog
+[submodule "students/mmolotkov"]
+	path = students/mmolotkov
+	url = https://github.com/Extra5enS/IndustrialProgramingFirstHomeWork
+[submodule "students/vsokolov"]
+	path = students/vsokolov
+	url = https://github.com/SokolovVadim/Industrial_Programming_DATI
