@@ -1,3 +1,9 @@
 *.intermediate
 *build
 *logs
+*project
+*.vs
+*Debug
+*x64
+*result.txt
+*example

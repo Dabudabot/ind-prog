@@ -1,0 +1,9 @@
+[submodule "students/kpuchkov"]
+	path = students/kpuchkov
+	url = https://github.com/puchkovki/Industrial-programming
+[submodule "students/kchekanov"]
+	path = students/kchekanov
+	url = https://github.com/kichyr/development_technology_software
+[submodule "students/farukh"]
+	path = students/farukh
+	url = https://github.com/Fyaushev/ind-prog
