@@ -1,8 +1,8 @@
 @echo off
 
 set PROJECT_NAME=%1%
-set STUDENT_NAME=%2%
-set PROJECT_MAIN=%3%
+set PROJECT_DEFINE=%2%
+set STUDENT_NAME=%3%
 set STUDENT_SOL=%4%
 
 if not exist "logs" mkdir "logs"
@@ -14,13 +14,15 @@ echo %date% %time% > %LOG_FILE_STUDENT%
 echo ------------------ >> %LOG_FILE_STUDENT%
 echo BUILD: >> %LOG_FILE_STUDENT%
 
-echo calling build.cmd %PROJECT_NAME%.exe %PROJECT_MAIN% %STUDENT_SOL% %LOG_FILE_STUDENT%
-echo build.cmd %PROJECT_NAME%.exe %PROJECT_MAIN% %STUDENT_SOL% %LOG_FILE_STUDENT% >> %LOG_FILE_STUDENT%
-start /wait build.cmd %PROJECT_NAME%.exe %PROJECT_MAIN% %STUDENT_SOL% %LOG_FILE_STUDENT%
+if not exist %STUDENT_SOL% goto :error
+
+echo build.cmd %PROJECT_NAME% %PROJECT_DEFINE% %STUDENT_SOL% %LOG_FILE_STUDENT%
+echo build.cmd %PROJECT_NAME% %PROJECT_DEFINE% %STUDENT_SOL% %LOG_FILE_STUDENT% >> %LOG_FILE_STUDENT%
+start /wait build.cmd %PROJECT_NAME% %PROJECT_DEFINE% %STUDENT_SOL% %LOG_FILE_STUDENT%
 
 if errorlevel 1 goto :error
 
-echo call build.cmd %PROJECT_NAME%.exe %PROJECT_MAIN% %STUDENT_SOL% %LOG_FILE_STUDENT% SUCCESS
+echo ----- SUCCESS
 echo ----- SUCCESS >> %LOG_FILE_STUDENT%
 
 echo RUN: >> %LOG_FILE_STUDENT%
@@ -28,16 +30,16 @@ echo RUN: >> %LOG_FILE_STUDENT%
 setlocal enabledelayedexpansion
 set HAS_ERROR=FALSE
 for /f %%f in ('dir /b "%PROJECT_NAME%\cases"') do ( 
-    REM echo calling build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f with output to %LOG_FILE_STUDENT%
+    REM to call without new line
     echo | set /p dummyName=Running test: %PROJECT_NAME%\cases\%%f >> %LOG_FILE_STUDENT%
     set errorlevel=
     call build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f
     if !errorlevel!==0 ( 
-        echo calling build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f SUCCESS
+        echo build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f SUCCESS
         echo ------- OK >> %LOG_FILE_STUDENT% 
     ) else (
         set HAS_ERROR=TRUE
-        echo calling build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f FAIL 
+        echo build\%PROJECT_NAME%.exe %PROJECT_NAME%\cases\%%f FAIL 
         echo ------- FAIL >> %LOG_FILE_STUDENT% 
     )
 )
