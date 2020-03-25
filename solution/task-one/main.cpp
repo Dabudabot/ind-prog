@@ -6,8 +6,9 @@
 #include <shellapi.h>
 #include <string>
 
+#define RESULT_FILE_CPP "result_cpp.txt"
+#define RESULT_FILE_C "result_c.txt"
 #define FIND_NUMBER
-
 #if defined(FIND_NUMBER) && defined(FIZZ_BUZZ)
 #error Both configs defined
 #endif
@@ -71,6 +72,11 @@ int endAssert(std::fstream &file)
 	return 0;
 }
 
+bool is_empty(std::fstream& pFile)
+{
+    return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
 int check(int result, const char *filename)
 {
 	//
@@ -81,7 +87,13 @@ int check(int result, const char *filename)
 
 	//	open student`s solution result
 	std::fstream target;
-	target.open("result.txt", std::ios::in);
+	target.open(RESULT_FILE_CPP, std::ios::in);
+
+	if (is_empty(target))
+	{
+		target.close();
+		target.open(RESULT_FILE_C, std::ios::in);
+	}
 
 	//
 	// solve test case by ourselves
@@ -172,14 +184,23 @@ int test_runner(int (*solution)(), const char *filename)
 	//
 	// open file with current test case
 	//
+	FILE* fp;
+	FILE* rfp;
 	std::fstream case_file;
 	case_file.open(filename, std::ios::in);
+	errno_t err = freopen_s(&fp, filename, "r", stdin);
+
+	if (err != 0 || !case_file.is_open())
+	{
+		return 1;
+	}
 
 	//
 	// to this file we will write the results
 	//
 	std::fstream result_file;
-	result_file.open("result.txt", std::ios::out);
+	result_file.open(RESULT_FILE_CPP, std::ios::out);
+	err = freopen_s(&rfp, RESULT_FILE_C, "w", stdout);
 
 	//
 	//	get streams to the file
@@ -210,6 +231,8 @@ int test_runner(int (*solution)(), const char *filename)
 	//
 	case_file.close();
 	result_file.close();
+	fclose(rfp);
+	fclose(fp);
 
 	//
 	// restore original streams
@@ -221,6 +244,9 @@ int test_runner(int (*solution)(), const char *filename)
 	// checking the answer depending on task
 	//
 	auto status = check(result, filename);
+
+	remove(RESULT_FILE_CPP);
+	remove(RESULT_FILE_C);
 	
 	//
 	// if solution of the students is right resut 0, otherwise 1

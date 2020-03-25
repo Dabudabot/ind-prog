@@ -7,12 +7,12 @@ REM Build specific student with specific project
 REM %1 - project name (folder). Possibly <find-number> or <fizz-buzz>
 REM %2 - project define for test main. Possibly <FIND_NUMBER> or <FIZZ_BUZZ>
 REM %3 - student name (his folder in students)
-REM %4 - students solution file
+REM %4 - students solution folder
 
 set PROJECT_NAME=%1%
 set PROJECT_DEFINE=%2%
 set STUDENT_NAME=%3%
-set STUDENT_SOL=%4%
+set STUDENT_SOL_FOLDER=%4%
 
 if not exist "logs" mkdir "logs"
 if not exist "logs\students" mkdir "logs\students"
@@ -23,7 +23,10 @@ echo %date% %time% > %LOG_FILE_STUDENT%
 echo ------------------ >> %LOG_FILE_STUDENT%
 echo BUILD: >> %LOG_FILE_STUDENT%
 
-if not exist %STUDENT_SOL% goto :error
+set STUDENT_SOL=MISSING
+if exist %STUDENT_SOL_FOLDER%solution.c set STUDENT_SOL=%STUDENT_SOL_FOLDER%solution.c
+if exist %STUDENT_SOL_FOLDER%solution.cpp set STUDENT_SOL=%STUDENT_SOL_FOLDER%solution.cpp
+if "%STUDENT_SOL%"=="MISSING" goto :error
 
 echo build.cmd %PROJECT_NAME% %PROJECT_DEFINE% %STUDENT_SOL% %LOG_FILE_STUDENT%
 echo build.cmd %PROJECT_NAME% %PROJECT_DEFINE% %STUDENT_SOL% %LOG_FILE_STUDENT% >> %LOG_FILE_STUDENT%

@@ -39,3 +39,5 @@ During build and run scripts will create the following dirs:
     [exec_all.cmd]: <https://github.com/Dabudabot/ind-prog/blob/master/exec_all.cmd>
     [exec_custom.cmd]: <https://github.com/Dabudabot/ind-prog/blob/master/exec_custom.cmd>
     [build.cmd]: <https://github.com/Dabudabot/ind-prog/blob/master/build.cmd>
+
+Platform: Windows only
