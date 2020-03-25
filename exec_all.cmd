@@ -10,7 +10,7 @@ set EXEC_CUSTOM=FALSE
 
 if not exist "logs" mkdir "logs"
 
-call :exec find-number FIND_NUMBER
+REM call :exec find-number FIND_NUMBER
 call :exec fizz-buzz FIZZ_BUZZ
 goto :exit
 
