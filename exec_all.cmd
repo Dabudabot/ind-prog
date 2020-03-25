@@ -1,5 +1,9 @@
 @echo off
 
+REM @author Daulet Tumbayev
+REM @date 25.03.2020
+REM Run all students and all projects
+
 cls
 
 set EXEC_CUSTOM=FALSE
@@ -7,7 +11,7 @@ set EXEC_CUSTOM=FALSE
 if not exist "logs" mkdir "logs"
 
 call :exec find-number FIND_NUMBER
-REM call :exec fizz-buzz FIZZ_BUZZ
+call :exec fizz-buzz FIZZ_BUZZ
 goto :exit
 
 :exec

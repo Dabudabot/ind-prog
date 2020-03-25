@@ -1,5 +1,14 @@
 @echo off
 
+REM @author Daulet Tumbayev
+REM @date 25.03.2020
+
+REM Build specific student with specific project
+REM %1 - project name (folder). Possibly <find-number> or <fizz-buzz>
+REM %2 - project define for test main. Possibly <FIND_NUMBER> or <FIZZ_BUZZ>
+REM %3 - student name (his folder in students)
+REM %4 - students solution file
+
 set PROJECT_NAME=%1%
 set PROJECT_DEFINE=%2%
 set STUDENT_NAME=%3%
