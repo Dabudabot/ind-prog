@@ -8,7 +8,7 @@
 
 #define RESULT_FILE_CPP "result_cpp.txt"
 #define RESULT_FILE_C "result_c.txt"
-#define FIND_NUMBER
+
 #if defined(FIND_NUMBER) && defined(FIZZ_BUZZ)
 #error Both configs defined
 #endif
