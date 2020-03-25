@@ -4,8 +4,11 @@
 #include <cassert>
 #include <unordered_map>
 #include <shellapi.h>
+#include <string>
 
-#ifdef FIND_NUMBER & FIZZ_BUZZ
+#define FIND_NUMBER
+
+#if defined(FIND_NUMBER) && defined(FIZZ_BUZZ)
 #error Both configs defined
 #endif
 
@@ -15,6 +18,18 @@
 
 // declare the main of the student solution
 int main();
+
+int read_assert(std::fstream &file, const char* variable)
+{
+	while (true)
+	{
+		std::string str;
+		file >> str;
+
+		if (file.fail()) return 1;
+		if (!_stricmp(str.c_str(), variable)) return 0;
+	}
+}
 
 int read_assert(std::fstream &file, const int variable)
 {
@@ -71,7 +86,7 @@ int check(int result, const char *filename)
 	//
 	// solve test case by ourselves
 	//
-	#ifdef FIND_NUMBER
+	#if defined(FIND_NUMBER)
 	#pragma message("Building find number")
 	size_t m, n;
 	std::unordered_map<size_t, size_t> array;
@@ -106,13 +121,44 @@ int check(int result, const char *filename)
 			}
 		}
 	}
-	#else
-	#ifdef FIZZ_BUZZ
+	#elif defined(FIZZ_BUZZ)
 	#pragma message("Building fizz buzz")
-	#error "NOT READY"
+	size_t n;
+	source >> n;
+	for (size_t i = 0; i < n; ++i)
+	{
+		long long x;
+		source >> x;
+
+		if (source.fail())
+		{
+			if (result != 0)
+			{
+				return 0;
+			}
+			
+			return 1;
+		}
+
+		if (x % 3 == 0 && x % 5 == 0)
+		{
+			if (read_assert(target, "fizzbuzz")) return 1;
+		}
+		else if(x % 3 == 0)
+		{
+			if (read_assert(target, "fizz")) return 1;
+		}
+		else if (x % 5 == 0)
+		{
+			if (read_assert(target, "buzz")) return 1;
+		}
+		else
+		{
+			if (read_assert(target, x)) return 1;
+		}
+	}
 	#else
 	#error "FIND_NUMBER or FIZZ_BUZZ must be defined"
-	#endif
 	#endif
 
 	auto status = endAssert(target);
