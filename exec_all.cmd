@@ -10,7 +10,7 @@ set EXEC_CUSTOM=FALSE
 
 if not exist "logs" mkdir "logs"
 
-REM call :exec find-number FIND_NUMBER
+call :exec find-number FIND_NUMBER
 call :exec fizz-buzz FIZZ_BUZZ
 goto :exit
 
@@ -27,7 +27,7 @@ for /d %%i in (students\*) do (
     ) else ( 
         echo %%i SUCCESS && echo %%i SUCCESS >> %LOG_FILE_PROJECT% 
     )
-    REM pause
+    pause
 )
 echo ------------------ >> %LOG_FILE_PROJECT%
 exit /b 0

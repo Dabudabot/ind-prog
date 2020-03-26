@@ -144,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\students\vpukhov\find-number\solution.cpp" />
+    <ClCompile Include="..\..\students\yprokhorskoy\fizz-buzz\solution.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

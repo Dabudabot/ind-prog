@@ -28,11 +28,14 @@ int read_assert(std::fstream &file, const char* variable)
 		file >> str;
 
 		if (file.fail()) return 1;
-		if (!_stricmp(str.c_str(), variable)) return 0;
+		if (!_stricmp(str.c_str(), variable))
+		{
+			return 0;
+		}
 	}
 }
 
-int read_assert(std::fstream &file, const int variable)
+int read_assert(std::fstream &file, const long long variable)
 {
 	while (true)
 	{
@@ -43,10 +46,10 @@ int read_assert(std::fstream &file, const int variable)
 			return 1;
 		}
 
-		if (isdigit(symbol))
+		if (isdigit(symbol) || symbol == '-')
 		{
 			file.putback(symbol);
-			int var = 0;
+			long long var = 0;
 			file >> var;
 
 			if (var != variable)
